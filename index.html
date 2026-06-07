@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M. Hassan Shaikh | Portfolio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,6 +14,297 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
+
+        /* Chatbot Button */
+    .chatbot-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 65px;
+        height: 65px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 5px 20px rgba(102,126,234,0.5); }
+        50% { transform: scale(1.05); box-shadow: 0 5px 30px rgba(102,126,234,0.8); }
+        100% { transform: scale(1); box-shadow: 0 5px 20px rgba(102,126,234,0.5); }
+    }
+
+    .chatbot-button:hover {
+        transform: scale(1.1);
+    }
+
+    .chatbot-button i {
+        font-size: 32px;
+        color: white;
+    }
+
+    /* Chatbot Window */
+    .chatbot-window {
+        position: fixed;
+        bottom: 110px;
+        right: 30px;
+        width: 380px;
+        height: 550px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        z-index: 1001;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .chatbot-window.open {
+        display: flex;
+    }
+
+    /* Chatbot Header */
+    .chatbot-header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        padding: 18px 20px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chatbot-header h3 {
+        font-size: 18px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .chatbot-header h3 i {
+        font-size: 24px;
+    }
+
+    .close-chatbot {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .close-chatbot:hover {
+        transform: rotate(90deg);
+    }
+
+    /* Chat Messages Area */
+    .chat-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* Message Bubbles */
+    .message {
+        max-width: 85%;
+        padding: 12px 16px;
+        border-radius: 18px;
+        font-size: 14px;
+        line-height: 1.4;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bot-message {
+        background: white;
+        color: #333;
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .user-message {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+    }
+
+    /* Typing Indicator */
+    .typing-indicator {
+        background: white;
+        padding: 12px 16px;
+        border-radius: 18px;
+        align-self: flex-start;
+        display: flex;
+        gap: 5px;
+    }
+
+    .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: #667eea;
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+        0%, 60%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-10px); }
+    }
+
+    /* Suggested Questions */
+    .suggested-questions {
+        padding: 12px;
+        background: white;
+        border-top: 1px solid #eee;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .suggested-btn {
+        background: #f0f0f0;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #667eea;
+    }
+
+    .suggested-btn:hover {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Chatbot Input */
+    .chatbot-input {
+        padding: 15px;
+        background: white;
+        border-top: 1px solid #eee;
+        display: flex;
+        gap: 10px;
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .chatbot-input input:focus {
+        border-color: #667eea;
+    }
+
+    .chatbot-input button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .chatbot-input button:hover {
+        transform: scale(1.05);
+    }
+
+    /* Dark Mode */
+    body.dark-mode .chatbot-window {
+        background: #2d2d2d;
+    }
+
+    body.dark-mode .chat-messages {
+        background: #1a1a1a;
+    }
+
+    body.dark-mode .bot-message {
+        background: #3d3d3d;
+        color: white;
+    }
+
+    body.dark-mode .suggested-questions {
+        background: #2d2d2d;
+        border-top-color: #444;
+    }
+
+    body.dark-mode .suggested-btn {
+        background: #3d3d3d;
+        color: #a78bfa;
+    }
+
+    body.dark-mode .chatbot-input {
+        background: #2d2d2d;
+        border-top-color: #444;
+    }
+
+    body.dark-mode .chatbot-input input {
+        background: #3d3d3d;
+        border-color: #555;
+        color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+        .chatbot-window {
+            width: calc(100vw - 40px);
+            right: 20px;
+            left: 20px;
+            height: 500px;
+        }
+        
+        .chatbot-button {
+            bottom: 20px;
+            right: 20px;
+        }
+    }
+
+
+
+
+
+
+
+
+        
         * {
             margin: 0;
             padding: 0;
@@ -1373,7 +1666,232 @@
 
     </div>
 
+
+
+<!-- Chatbot Button -->
+<div class="chatbot-button" id="chatbotButton">
+    <i class="fas fa-robot"></i>
+</div>
+
+<!-- Chatbot Window -->
+<div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+        <h3>
+            <i class="fas fa-robot"></i>
+            AI Assistant - Hassan
+        </h3>
+        <button class="close-chatbot" id="closeChatbot">✕</button>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+            👋 Hello! I'm Hassan's AI Assistant. Ask me anything about his skills, projects, or services!
+        </div>
+    </div>
+    
+    <div class="suggested-questions" id="suggestedQuestions">
+        <button class="suggested-btn" data-question="What are your skills?">💻 Skills</button>
+        <button class="suggested-btn" data-question="How many websites have you built?">🌐 Projects</button>
+        <button class="suggested-btn" data-question="Are you available for freelance work?">💼 Freelance</button>
+        <button class="suggested-btn" data-question="How can I contact you?">📧 Contact</button>
+        <button class="suggested-btn" data-question="What certifications do you have?">📜 Certifications</button>
+        <button class="suggested-btn" data-question="What is your experience?">⭐ Experience</button>
+    </div>
+    
+    <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+
+
+
+
+
+    
     <script>
+
+        // Chatbot Logic - AI Responses
+    const botResponses = {
+        // Skills related
+        skills: "🎯 I have expertise in:\n\n• Web Development (HTML, CSS, JavaScript)\n• Desktop Apps (C#, .NET Framework)\n• Video Editing & Graphic Design\n• Content Creation (YouTube, Facebook)\n• Freelancing (Fiverr, Upwork)",
+        
+        websites: "🌐 I have successfully completed <strong>30+ websites</strong> for clients worldwide! Each website is fully responsive, modern, and customized to client needs.",
+        
+        experience: "⭐ I'm a BS Computer Science student at The Shaikh Ayaz University with hands-on freelance experience. I've completed 30+ websites, multiple Fiverr/Upwork orders, and won 1st position in university project exhibition!",
+        
+        freelance: "💼 Yes! I'm <strong>available for freelance work</strong>. Whether you need a website, desktop application, video editing, or graphic design - I can help. Click the 'Hire Me' button or contact me directly!",
+        
+        contact: "📬 You can reach me through:\n\n• Email: hassanlinkedin34@gmail.com\n• Phone: 0316-3429883\n• GitHub: MisterHassan34\n• LinkedIn: misterhassan34\n\nOr use the contact form on this website!",
+        
+        certifications: "📜 My certifications include:\n\n• Diploma in Information Technology (DIT)\n• E-Commerce Certification (NAVTTC)\n• English Language Certification\n• STS Test Pass Certificate\n\nAlso 6+ professional certifications!",
+        
+        price: "💰 Pricing depends on project requirements. A basic website starts from $50-$100, while complex projects are discussed individually. Contact me for a custom quote!",
+        
+        fiverr: "⭐ Yes, I'm active on Fiverr and Upwork! I've completed multiple orders with 5-star ratings. You can message me there or directly via this website.",
+        
+        education: "🎓 I'm currently pursuing <strong>BS Computer Science</strong> at The Shaikh Ayaz University, Shikarpur, Sindh. My core subjects include Data Structures, DBMS, OOP, Operating Systems, and more!",
+        
+        achievement: "🏆 My key achievements:\n\n• 1st Position in University Project Exhibition\n• 30+ Websites Completed\n• 15,000+ Facebook Followers\n• 6 Professional Certifications",
+        
+        default: "Thank you for your interest! I specialize in web development, desktop applications, video editing, and graphic design. Could you please rephrase your question? Or click on the suggested buttons above! 😊"
+    };
+
+    // Keyword matching function
+    function getBotResponse(userMessage) {
+        const msg = userMessage.toLowerCase();
+        
+        // Skills detection
+        if (msg.includes('skill') || msg.includes('know') || msg.includes('technology') || msg.includes('tech stack')) {
+            return botResponses.skills;
+        }
+        // Websites/projects detection
+        else if (msg.includes('website') || msg.includes('project') || msg.includes('built') || msg.includes('create')) {
+            return botResponses.websites;
+        }
+        // Experience detection
+        else if (msg.includes('experience') || msg.includes('work') || msg.includes('background')) {
+            return botResponses.experience;
+        }
+        // Freelance availability
+        else if (msg.includes('freelance') || msg.includes('available') || msg.includes('hire') || msg.includes('work')) {
+            return botResponses.freelance;
+        }
+        // Contact detection
+        else if (msg.includes('contact') || msg.includes('email') || msg.includes('phone') || msg.includes('reach')) {
+            return botResponses.contact;
+        }
+        // Certifications
+        else if (msg.includes('certificate') || msg.includes('certification') || msg.includes('course')) {
+            return botResponses.certifications;
+        }
+        // Price/Cost
+        else if (msg.includes('price') || msg.includes('cost') || msg.includes('charge') || msg.includes('rate') || msg.includes('budget')) {
+            return botResponses.price;
+        }
+        // Fiverr/Upwork
+        else if (msg.includes('fiverr') || msg.includes('upwork') || msg.includes('platform')) {
+            return botResponses.fiverr;
+        }
+        // Education
+        else if (msg.includes('education') || msg.includes('study') || msg.includes('university') || msg.includes('college')) {
+            return botResponses.education;
+        }
+        // Achievements
+        else if (msg.includes('achievement') || msg.includes('award') || msg.includes('position') || msg.includes('win')) {
+            return botResponses.achievement;
+        }
+        // Greetings
+        else if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey') || msg.includes('greeting')) {
+            return "👋 Hello! Welcome to Hassan's portfolio. How can I assist you today? Feel free to ask about my skills, projects, or freelance services!";
+        }
+        // Thanks
+        else if (msg.includes('thank') || msg.includes('thanks')) {
+            return "🎉 You're most welcome! Feel free to reach out if you need any help with your project. Have a great day!";
+        }
+        else {
+            return botResponses.default;
+        }
+    }
+
+    // Typing animation effect
+    async function showTypingIndicator() {
+        const messagesDiv = document.getElementById('chatMessages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = '<span></span><span></span><span></span>';
+        messagesDiv.appendChild(typingDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        const indicator = document.getElementById('typingIndicator');
+        if (indicator) indicator.remove();
+    }
+
+    // Add message to chat
+    function addMessage(text, isUser) {
+        const messagesDiv = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+        messageDiv.innerHTML = isUser ? text : text;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Send message function
+    async function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const userMessage = input.value.trim();
+        
+        if (userMessage === '') return;
+        
+        // Add user message
+        addMessage(userMessage, true);
+        input.value = '';
+        
+        // Show typing indicator
+        await showTypingIndicator();
+        
+        // Get bot response
+        const botResponse = getBotResponse(userMessage);
+        addMessage(botResponse, false);
+    }
+
+    // Suggested questions click handler
+    document.querySelectorAll('.suggested-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const question = btn.getAttribute('data-question');
+            addMessage(question, true);
+            await showTypingIndicator();
+            const response = getBotResponse(question);
+            addMessage(response, false);
+        });
+    });
+
+    // Chatbot UI controls
+    const chatbotButton = document.getElementById('chatbotButton');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const closeChatbot = document.getElementById('closeChatbot');
+
+    chatbotButton.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('open');
+    });
+
+    closeChatbot.addEventListener('click', () => {
+        chatbotWindow.classList.remove('open');
+    });
+
+    // Close on outside click (optional)
+    document.addEventListener('click', (e) => {
+        if (!chatbotWindow.contains(e.target) && !chatbotButton.contains(e.target) && chatbotWindow.classList.contains('open')) {
+            chatbotWindow.classList.remove('open');
+        }
+    });
+
+    // Function to send message from anywhere (can be called from console)
+    window.askChatbot = function(question) {
+        addMessage(question, true);
+        setTimeout(async () => {
+            await showTypingIndicator();
+            const response = getBotResponse(question);
+            addMessage(response, false);
+        }, 500);
+    };
+
+
+        
+
+
+
+
+
+
+
+
+        
         // ============ ADVANCED PARTICLE NETWORK ============
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
