@@ -1132,7 +1132,7 @@
         .scroll-top {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 30px;
             width: 50px;
             height: 50px;
             background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -1284,9 +1284,14 @@
                     <a href="#projects" class="btn btn-outline">
                         <i class="fas fa-code"></i> View Projects
                     </a>
-                    <a href="#" class="btn btn-outline" onclick="alert('Resume download feature coming soon!')">
-                        <i class="fas fa-download"></i> Resume
-                    </a>
+
+                    
+                 <a href="https://raw.githubusercontent.com/misterhassan34/my-portfolio/main/resume.pdf" 
+                     download="resume.pdf"
+                       class="resume-btn">
+                       📄 Download Resume
+                        </a>
+                    
                 </div>
                 <div class="hero-stats">
                     <div class="hero-stat">
@@ -1656,7 +1661,7 @@
 
         <!-- FOOTER -->
         <footer>
-            <p>Developed by: <span>M. Hassan Shaikh</span>. Thank You <i class="fas fa-heart">For Visit My Portfolio</i> </p>
+            <p>Developed by: <span>M. Hassan Shaikh</span>  <i class="fas fa-heart"> Thank You For Visit My Portfolio</i> </p>
         </footer>
 
         <!-- Scroll to Top -->
@@ -2030,12 +2035,12 @@
 
         // ============ TYPING ANIMATION ============
         const roles = [
-            'BS Computer Science Student',
+            'BS Computer Science',
             'Web Developer',
             'Freelancer on Fiverr & Upwork',
             'Video Editor & Graphic Designer',
             'YouTube Content Creator',
-            'C# / .NET Developer'
+            'C# / .NET / SQL Developer'
         ];
         
         let roleIndex = 0;
